@@ -7,9 +7,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { metaReducers, reducers } from './reducers';
+import { NotesComponent } from './notes.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NotesComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

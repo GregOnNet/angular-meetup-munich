@@ -7,11 +7,12 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "nt",
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss",
-          "inlineTemplate": true
+          "inlineTemplate": true,
+          "spec": false
         }
       },
       "architect": {
