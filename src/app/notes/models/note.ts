@@ -1,9 +1,9 @@
-import { NoteColors } from './note-colors';
+import { NoteCategory } from './note-category';
 
 export class Note {
   constructor(
     public title = '',
     public text = '',
-    public color = NoteColors.Default
+    public category = new NoteCategory()
   ) {}
 }
