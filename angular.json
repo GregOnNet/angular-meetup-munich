@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "ngrx-playground"
+  "defaultProject": "ngrx-playground",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
