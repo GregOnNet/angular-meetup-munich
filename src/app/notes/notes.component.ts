@@ -7,8 +7,4 @@ import { Component, OnInit } from '@angular/core';
   `,
   styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class NotesComponent {}

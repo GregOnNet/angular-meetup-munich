@@ -18,10 +18,6 @@ import { Note } from '../models/note';
   `,
   styleUrls: ['./note-card.component.scss']
 })
-export class NoteCardComponent implements OnInit {
+export class NoteCardComponent {
   @Input() note = new Note();
-
-  constructor() {}
-
-  ngOnInit() {}
 }
