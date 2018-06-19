@@ -1,6 +1,10 @@
 import { NotesActions, NotesActionTypes } from '../actions/notes.actions';
 import { Note } from '../models/note';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { RouterStateSnapshot } from '@angular/router';
+import { RouterStateSerializer } from '@ngrx/router-store';
+import { RouterStateUrl } from '../../lib/router/router-state-url';
+import { RouterState } from '../../lib/router/router-state';
 
 export interface State {
   all: { [guid: string]: Note };
@@ -27,7 +31,14 @@ export function reducer(state = initialState, action: NotesActions): State {
 }
 
 const notesFeature = createFeatureSelector<State>('notes');
+const routerState = createFeatureSelector<RouterState>('router');
 
 export const all = createSelector(notesFeature, state =>
   Object.keys(state.all).map(guid => state.all[guid])
+);
+
+export const currentDetails = createSelector(
+  notesFeature,
+  routerState,
+  (notes, router) => notes.all[router.state.params.guid]
 );

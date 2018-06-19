@@ -5,13 +5,15 @@ import { Observable } from 'rxjs';
 import { Note } from '../models/note';
 import * as fromNotes from '../reducers/notes.reducer';
 
+import { tap } from 'rxjs/operators';
+
 @Component({
   selector: 'nt-note-details',
   template: `
     <section class="heading">
       <h1 class="mat-h1">Details</h1>
     </section>
-    <nt-note-card></nt-note-card>
+    <nt-note-card [note]="note$ | async"></nt-note-card>
   `,
   styleUrls: ['./note-details.component.scss']
 })
@@ -19,6 +21,9 @@ export class NoteDetailsComponent {
   note$: Observable<Note>;
 
   constructor(private store: State<fromNotes.State>) {
-    this.note$ = this.store.pipe(select(fromNotes.currentDetails));
+    this.note$ = this.store.pipe(
+      select(fromNotes.currentDetails),
+      tap(console.log)
+    );
   }
 }
