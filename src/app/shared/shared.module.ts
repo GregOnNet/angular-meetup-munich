@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { ColorTagComponent } from './color-tag/color-tag.component';
+import { ColorTagComponent } from './components/color-tag/color-tag.component';
 
 @NgModule({
   imports: [CommonModule],
