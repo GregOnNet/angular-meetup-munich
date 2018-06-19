@@ -25,16 +25,10 @@ const routerState = createFeatureSelector<RouterState>('router');
 
 const getNoteCollection = createSelector(getNotes, notes => notes.collection);
 
-export const all = createSelector(getNoteCollection, n => {
-  console.log(n);
-  return fromNotes.all(n);
-});
+export const all = createSelector(getNoteCollection, fromNotes.all);
 
 export const currentDetails = createSelector(
-  getNotes,
+  getNoteCollection,
   routerState,
-  (notes, router) => {
-    console.log(notes);
-    return notes.collection.entities[router.state.params.guid];
-  }
+  (notes, router) => notes.entities[router.state.params.guid]
 );

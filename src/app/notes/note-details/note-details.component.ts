@@ -18,21 +18,10 @@ import { ActivatedRoute } from '@angular/router';
   `,
   styleUrls: ['./note-details.component.scss']
 })
-export class NoteDetailsComponent implements OnInit, OnDestroy {
-  s = Subscription.EMPTY;
+export class NoteDetailsComponent {
   note$: Observable<Note>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private store: State<fromNotes.NotesState>
-  ) {}
-
-  ngOnInit(): void {
-    this.s = this.store.subscribe(console.log);
+  constructor(private store: State<fromNotes.NotesState>) {
     this.note$ = this.store.pipe(select(fromNotes.currentDetails));
-  }
-
-  ngOnDestroy() {
-    this.s.unsubscribe();
   }
 }

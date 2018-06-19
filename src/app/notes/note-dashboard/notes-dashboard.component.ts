@@ -26,12 +26,7 @@ export class NotesDashboardComponent implements OnInit {
   notes$: Observable<Note[]>;
 
   constructor(private store: Store<fromNotes.NotesState>) {
-    this.s = this.store.subscribe(console.log);
     this.notes$ = this.store.pipe(select(fromNotes.all));
-  }
-
-  ngOnInit(): void {
-    this.store.dispatch(new LoadAllNotes());
   }
 
   dispatchNewNote(note: Note) {
