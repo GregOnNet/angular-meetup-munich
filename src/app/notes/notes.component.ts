@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'nt-notes',
   template: `
+    <nt-note-creator></nt-note-creator>
     <nt-note-card></nt-note-card>
   `,
   styleUrls: ['./notes.component.scss']
