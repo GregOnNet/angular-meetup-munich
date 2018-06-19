@@ -2,11 +2,11 @@ import { NotesActions, NotesActionTypes } from '../actions/notes.actions';
 import { Note } from '../models/note';
 
 export interface State {
-  notes: { [guid: string]: Note };
+  all: { [guid: string]: Note };
 }
 
 export const initialState: State = {
-  notes: {}
+  all: {}
 };
 
 export function reducer(state = initialState, action: NotesActions): State {
@@ -17,7 +17,7 @@ export function reducer(state = initialState, action: NotesActions): State {
     case NotesActionTypes.CreateNote:
       return {
         ...state,
-        notes: { ...state.notes, [action.payload.guid]: action.payload }
+        all: { ...state.all, [action.payload.guid]: action.payload }
       };
 
     default:
