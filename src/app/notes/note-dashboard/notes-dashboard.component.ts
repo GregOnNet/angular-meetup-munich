@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { CreateNote } from '../actions/notes.actions';
+import { CreateNote, LoadAllNotes } from '../actions/notes.actions';
 import { Note } from '../models/note';
 import * as fromNotes from '../reducers';
 
@@ -22,11 +22,16 @@ import * as fromNotes from '../reducers';
   `,
   styleUrls: ['./notes-dashboard.component.scss']
 })
-export class NotesDashboardComponent {
+export class NotesDashboardComponent implements OnInit {
   notes$: Observable<Note[]>;
 
-  constructor(private store: Store<fromNotes.State>) {
+  constructor(private store: Store<fromNotes.NotesState>) {
+    this.s = this.store.subscribe(console.log);
     this.notes$ = this.store.pipe(select(fromNotes.all));
+  }
+
+  ngOnInit(): void {
+    this.store.dispatch(new LoadAllNotes());
   }
 
   dispatchNewNote(note: Note) {

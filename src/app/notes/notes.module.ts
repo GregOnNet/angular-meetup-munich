@@ -7,16 +7,18 @@ import {
   MatFormFieldModule,
   MatInputModule
 } from '@angular/material';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '../shared/shared.module';
+import { NotesEffects } from './effects/notes.effects';
 import { NoteCardComponent } from './note-card/note-card.component';
 import { NoteCreatorComponent } from './note-creator/note-creator.component';
 import { NotesDashboardComponent } from './note-dashboard/notes-dashboard.component';
 import { NoteDetailsComponent } from './note-details/note-details.component';
 import { NotesRoutingModule } from './notes-routing.module';
 import { NotesComponent } from './notes.component';
-import * as fromNotes from './reducers/notes.reducer';
+import * as fromNotes from './reducers';
 
 @NgModule({
   imports: [
@@ -29,7 +31,8 @@ import * as fromNotes from './reducers/notes.reducer';
     ReactiveFormsModule,
 
     SharedModule,
-    StoreModule.forFeature('notes', fromNotes.reducer),
+    StoreModule.forFeature('notes', fromNotes.reducers),
+    EffectsModule.forFeature([NotesEffects]),
 
     NotesRoutingModule
   ],

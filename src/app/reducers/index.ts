@@ -9,7 +9,7 @@ export interface State {
 }
 
 export const reducers: ActionReducerMap<State> = {
-  router: routerReducer as any
+  router: routerReducer
 };
 
 export const metaReducers: MetaReducer<State>[] = !environment.production

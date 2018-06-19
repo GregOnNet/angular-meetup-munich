@@ -1,19 +1,40 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import {
+  ActionReducerMap,
+  createFeatureSelector,
+  createSelector
+} from '@ngrx/store';
 
 import { RouterState } from '../../lib/router/router-state';
-import { State } from './notes.slice';
-
+import * as fromRoot from '../../reducers';
 import * as fromNotes from './notes.reducer';
 
-const notesFeature = createFeatureSelector<State>('notes');
+export interface NotesState {
+  collection: fromNotes.State;
+}
+
+export interface State extends fromRoot.State {
+  notes: NotesState;
+}
+
+export const reducers: ActionReducerMap<NotesState> = {
+  collection: fromNotes.reducer
+};
+
+const getNotes = createFeatureSelector<NotesState>('notes');
 const routerState = createFeatureSelector<RouterState>('router');
 
-export { State } from './notes.slice';
+const getNoteCollection = createSelector(getNotes, notes => notes.collection);
 
-export const all = createSelector(notesFeature, fromNotes.all);
+export const all = createSelector(getNoteCollection, n => {
+  console.log(n);
+  return fromNotes.all(n);
+});
 
 export const currentDetails = createSelector(
-  notesFeature,
+  getNotes,
   routerState,
-  (notes, router) => notes.entities[router.state.params.guid]
+  (notes, router) => {
+    console.log(notes);
+    return notes.collection.entities[router.state.params.guid];
+  }
 );

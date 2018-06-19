@@ -1,12 +1,15 @@
-import { createEntityAdapter } from '@ngrx/entity';
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
 
 import { NotesActions, NotesActionTypes } from '../actions/notes.actions';
 import { Note } from '../models/note';
-import { State } from './notes.slice';
+
+export interface State extends EntityState<Note> {}
 
 const notes = createEntityAdapter<Note>({
   selectId: note => note.guid
 });
+
+const initialState = notes.getInitialState();
 
 export const {
   selectAll: all,
@@ -15,17 +18,18 @@ export const {
   selectTotal: total
 } = notes.getSelectors();
 
-export function reducer(
-  state = notes.getInitialState(),
-  action: NotesActions
-): State {
+export function reducer(state = initialState, action: NotesActions): State {
   switch (action.type) {
-    case NotesActionTypes.LoadNotes:
-      return state;
-
-    case NotesActionTypes.CreateNote:
+    case NotesActionTypes.CreateNote: {
       return notes.addOne(action.payload, state);
-    default:
+    }
+
+    case NotesActionTypes.LoadNotesSuccessful: {
+      return notes.addMany(action.payload, state);
+    }
+
+    default: {
       return state;
+    }
   }
 }

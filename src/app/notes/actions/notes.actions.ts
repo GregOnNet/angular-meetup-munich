@@ -3,12 +3,19 @@ import { Action } from '@ngrx/store';
 import { Note } from '../models/note';
 
 export enum NotesActionTypes {
-  LoadNotes = '[Notes] Load Notes',
+  LoadAllNotes = '[Notes] Load Notes',
+  LoadNotesSuccessful = '[Notes] All Notes successfully loaded',
   CreateNote = '[Notes] Create new Note'
 }
 
-export class LoadNotes implements Action {
-  readonly type = NotesActionTypes.LoadNotes;
+export class LoadAllNotes implements Action {
+  readonly type = NotesActionTypes.LoadAllNotes;
+}
+
+export class LoadNotesSuccessful implements Action {
+  readonly type = NotesActionTypes.LoadNotesSuccessful;
+
+  constructor(public payload: Note[]) {}
 }
 
 export class CreateNote implements Action {
@@ -17,4 +24,4 @@ export class CreateNote implements Action {
   constructor(public payload: Note) {}
 }
 
-export type NotesActions = LoadNotes | CreateNote;
+export type NotesActions = LoadAllNotes | LoadNotesSuccessful | CreateNote;
