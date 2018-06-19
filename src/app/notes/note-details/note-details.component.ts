@@ -5,8 +5,6 @@ import { Observable } from 'rxjs';
 import { Note } from '../models/note';
 import * as fromNotes from '../reducers/notes.reducer';
 
-import { tap } from 'rxjs/operators';
-
 @Component({
   selector: 'nt-note-details',
   template: `
@@ -21,9 +19,6 @@ export class NoteDetailsComponent {
   note$: Observable<Note>;
 
   constructor(private store: State<fromNotes.State>) {
-    this.note$ = this.store.pipe(
-      select(fromNotes.currentDetails),
-      tap(console.log)
-    );
+    this.note$ = this.store.pipe(select(fromNotes.currentDetails));
   }
 }
