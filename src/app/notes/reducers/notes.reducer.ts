@@ -11,8 +11,14 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: NotesActions): State {
   switch (action.type) {
-    case NotesActionTypes.LoadNotess:
+    case NotesActionTypes.LoadNotes:
       return state;
+
+    case NotesActionTypes.CreateNote:
+      return {
+        ...state,
+        notes: { ...state.notes, [action.payload.guid]: action.payload }
+      };
 
     default:
       return state;
