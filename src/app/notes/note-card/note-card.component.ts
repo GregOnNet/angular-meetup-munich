@@ -15,6 +15,9 @@ import { Guid } from '../../shared/lib/guid.service';
           [text]="note.category.name">
         </nt-color-tag>
       </mat-card-content>
+      <mat-card-actions>
+        <ng-content></ng-content>
+      </mat-card-actions>
     </mat-card>
   `,
   styleUrls: ['./note-card.component.scss']
