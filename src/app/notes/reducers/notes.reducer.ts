@@ -1,44 +1,31 @@
+import { createEntityAdapter } from '@ngrx/entity';
+
 import { NotesActions, NotesActionTypes } from '../actions/notes.actions';
 import { Note } from '../models/note';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { RouterStateSnapshot } from '@angular/router';
-import { RouterStateSerializer } from '@ngrx/router-store';
-import { RouterStateUrl } from '../../lib/router/router-state-url';
-import { RouterState } from '../../lib/router/router-state';
+import { State } from './notes.slice';
 
-export interface State {
-  all: { [guid: string]: Note };
-}
+const notes = createEntityAdapter<Note>({
+  selectId: note => note.guid
+});
 
-export const initialState: State = {
-  all: {}
-};
+export const {
+  selectAll: all,
+  selectEntities: entities,
+  selectIds: guids,
+  selectTotal: total
+} = notes.getSelectors();
 
-export function reducer(state = initialState, action: NotesActions): State {
+export function reducer(
+  state = notes.getInitialState(),
+  action: NotesActions
+): State {
   switch (action.type) {
     case NotesActionTypes.LoadNotes:
       return state;
 
     case NotesActionTypes.CreateNote:
-      return {
-        ...state,
-        all: { ...state.all, [action.payload.guid]: action.payload }
-      };
-
+      return notes.addOne(action.payload, state);
     default:
       return state;
   }
 }
-
-const notesFeature = createFeatureSelector<State>('notes');
-const routerState = createFeatureSelector<RouterState>('router');
-
-export const all = createSelector(notesFeature, state =>
-  Object.keys(state.all).map(guid => state.all[guid])
-);
-
-export const currentDetails = createSelector(
-  notesFeature,
-  routerState,
-  (notes, router) => notes.all[router.state.params.guid]
-);

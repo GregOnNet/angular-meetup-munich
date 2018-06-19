@@ -3,7 +3,7 @@ import { select, State } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { Note } from '../models/note';
-import * as fromNotes from '../reducers/notes.reducer';
+import * as fromNotes from '../reducers';
 
 @Component({
   selector: 'nt-note-details',

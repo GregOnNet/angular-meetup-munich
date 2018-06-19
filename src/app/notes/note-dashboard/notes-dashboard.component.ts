@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { CreateNote } from '../actions/notes.actions';
 import { Note } from '../models/note';
-import * as fromNotes from '../reducers/notes.reducer';
+import * as fromNotes from '../reducers';
 
 @Component({
   selector: 'nt-notes-dashboard',
