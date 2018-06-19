@@ -3,14 +3,14 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'nt-color-tag',
   template: `
-    <svg height="32" width="32">
+    <svg height="32">
       <circle
-        cx="16"
-        cy="16"
+        cx="18"
+        cy="18"
         r="8"
         [attr.fill]="color" />
+      <text x="32" y="23">{{ text }}</text>
     </svg>
-    {{ text }}
   `,
   styleUrls: ['./color-tag.component.scss']
 })

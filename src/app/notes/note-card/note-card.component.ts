@@ -10,10 +10,12 @@ import { Guid } from '../../shared/lib/guid.service';
       <mat-card-title>{{ note.title }}</mat-card-title>
       <mat-card-content>
         {{ note.text }}
-        <nt-color-tag
-          [color]="note.category.color"
-          [text]="note.category.name">
-        </nt-color-tag>
+      </mat-card-content>
+      <mat-card-content>
+      <nt-color-tag
+        [color]="note.category.color"
+        [text]="note.category.name">
+      </nt-color-tag>
       </mat-card-content>
       <mat-card-actions>
         <ng-content></ng-content>
