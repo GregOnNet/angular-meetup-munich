@@ -1,5 +1,6 @@
 import { NotesActions, NotesActionTypes } from '../actions/notes.actions';
 import { Note } from '../models/note';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export interface State {
   all: { [guid: string]: Note };
@@ -24,3 +25,9 @@ export function reducer(state = initialState, action: NotesActions): State {
       return state;
   }
 }
+
+const notesFeature = createFeatureSelector<State>('notes');
+
+export const all = createSelector(notesFeature, state =>
+  Object.keys(state.all).map(guid => state.all[guid])
+);
