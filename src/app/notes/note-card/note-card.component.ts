@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Note } from '../models/note';
+import { Guid } from '../../shared/lib/guid.service';
 
 @Component({
   selector: 'nt-note-card',
@@ -19,5 +20,9 @@ import { Note } from '../models/note';
   styleUrls: ['./note-card.component.scss']
 })
 export class NoteCardComponent {
-  @Input() note = new Note();
+  @Input() note: Note;
+
+  constructor(guid: Guid) {
+    this.note = new Note(guid.generate());
+  }
 }
